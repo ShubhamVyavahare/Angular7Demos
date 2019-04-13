@@ -1,55 +1,81 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatPaginator, MatTableDataSource} from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
+	displayedColumns: string[] = ['menuName', 'menuCategoryId', 'menuType', 'menuImageId', 'isSpice', 'isSweet', 'ingredient', 'deleted', 'masterMenuId'];
+	dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	@ViewChild(MatSort) sort: MatSort;
+
+/*constructor(private menuService: MenuService){
 	
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+}
+*/
+	ngOnInit() {
+		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort;
+	}
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+	applyFilter(filterValue: string) {
+		this.dataSource.filter = filterValue.trim().toLowerCase();
+	}
+	
+	
+	/*delete(deleteValue: $event) {
+		
+		console.log("Edit value" + editValue);
+	}*/
+	
+	/*getMenuList()
+	{
+	 this.menuService.getSubList("/subjects").then(invSubList => {
+     console.log("------"+invSubList._body);
+     this.SubjectList = invSubList.json();
+	});
 
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-	this.dataSource.sort = this.sort;
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+}*/
 }
 
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+	menuName: string;
+	menuCategoryId: string;
+	menuType: string;
+	menuImageId: string;
+	isSpice: string;
+	isSweet: string;
+	ingredient: string;
+	deleted: string;
+	masterMenuId: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
+	{ menuName: 'Aloo chaat', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https://s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Aloo Pakoda', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Aloo tikki', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Aloo Vada', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Bhel', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Chili Pakoda', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Dabeli', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Dahl batata puri', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Dhokala/Khaman', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'hello menu', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Kachori', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Masala vada', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Onion Pakoda', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Palak chat', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Palak Pakoda', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Paneer Butter Masala', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Pani puri', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Papadi chat', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Samosa', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Samosa chat', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Sev puri', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' },
+	{ menuName: 'Veg Pakoda', menuCategoryId: 'd24fc89b333944c4bf40c73c8f3e21e4', menuType: 'aac056b384bf41eb8be7109ad2033f66', menuImageId: 'https:/s3.amazonaws.com/media-katoree4makers/D441176C-F926-445C-A632-5B3BD40482A2.jpg', isSpice: 'false', isSweet: 'false', ingredient: 'Flour crisps with diced potatoes, garnished with yougurt, tamarind and chat masala.', deleted: 'false',  masterMenuId: '64a516f428404ac1af8f3cfaccb11b05' }
 ];

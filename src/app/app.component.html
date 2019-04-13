@@ -5,28 +5,65 @@
 
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    <!-- menuName Column -->
+    <ng-container matColumnDef="menuName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Menu Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.menuName}} </td>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <!-- menuCategoryId Column -->
+    <ng-container matColumnDef="menuCategoryId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> menuCategoryId </th>
+      <td mat-cell *matCellDef="let element"> {{element.menuCategoryId}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    <!-- menuType Column -->
+    <ng-container matColumnDef="menuType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> menuType </th>
+      <td mat-cell *matCellDef="let element"> {{element.menuType}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    <!-- menuImageId Column -->
+    <ng-container matColumnDef="menuImageId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> menuImageId </th>
+      <td mat-cell *matCellDef="let element">{{element.menuImageId}}</td>
+    </ng-container>
+
+	<!-- isSpice Column -->
+    <ng-container matColumnDef="isSpice">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> isSpice </th>
+      <td mat-cell *matCellDef="let element"> {{element.isSpice}} </td>
+    </ng-container>
+
+	<!-- isSweet Column -->
+    <ng-container matColumnDef="isSweet">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> isSweet </th>
+      <td mat-cell *matCellDef="let element"> {{element.isSweet}} </td>
+    </ng-container>
+
+	<!-- ingredient Column -->
+    <ng-container matColumnDef="ingredient">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ingredient </th>
+      <td mat-cell *matCellDef="let element"> {{element.ingredient}} </td>
+    </ng-container>
+
+	<!-- deleted Column -->
+    <ng-container matColumnDef="deleted">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> deleted </th>
+      <td mat-cell *matCellDef="let element"> {{element.deleted}} </td>
+    </ng-container>
+
+	<!-- masterMenuId Column -->
+    <ng-container matColumnDef="masterMenuId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> masterMenuId </th>
+      <td mat-cell *matCellDef="let element"> 
+		<p>
+	  		<mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+		    	<mat-button-toggle value={{element.masterMenuId}} (click)="delete($event)" >Edit</mat-button-toggle>
+		    	<mat-button-toggle value="italic" onclick=" ">Delete</mat-button-toggle>
+	  		</mat-button-toggle-group>
+		</p> 
+	   </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -37,3 +74,6 @@
 </div>
 
 <router-outlet></router-outlet>
+
+
+<!--{{element.masterMenuId}}-->
